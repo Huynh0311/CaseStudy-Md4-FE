@@ -1,3 +1,5 @@
+let id = localStorage.getItem('idAccount');
+let token = localStorage.getItem('token');
 function login() {
     let username = document.getElementById("userNameLogin").value;
     let password = document.getElementById("passwordLogin").value;
@@ -19,6 +21,8 @@ function login() {
                 } else if (r.name === "ROLE_USER") {
                     location.href = "index.html";
                 }
+                localStorage.setItem("token", data.token);
+                    localStorage.setItem("idAccount", data.id);
             }
             },
             error: function (err) {
