@@ -7,9 +7,8 @@ function getAll() {
         headers: {
             'Accept': 'application/json',
         },
-        url: "http://localhost:8080/api/imgProduct",
+        url: "http://localhost:8080/api/products",
         success: function (data) {
-            console.log(data)
             show(data);
         },
         error: function (err) {
@@ -27,10 +26,10 @@ function show(arr) {
         str += `
                   <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
                     <div class="card w-100 my-2 shadow-2-strong">
-                      <img src="${p.thumbnail}" class="card-img-top" style="aspect-ratio: 1 / 1" />
+                      <img src="${p.imgProduct.thumbnail}" class="card-img-top" onclick="showProduct(p.id)" style="aspect-ratio: 1 / 1" />
                       <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">${p.product.name}</h5>
-                        <p class="card-text">$${p.product.price}</p>
+                        <h5 class="card-title name-product" onclick="showProduct(p.id)">${p.name}</h5>
+                        <p class="card-text">$${p.price}</p>
                         <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
                           <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
                           <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
@@ -61,4 +60,7 @@ function search(){
             console.log(err)
         }
     });
+}
+function showProduct(idP){
+    window.location = "product_detail.html?id=" + idP;
 }
