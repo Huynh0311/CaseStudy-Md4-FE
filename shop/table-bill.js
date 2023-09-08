@@ -26,10 +26,10 @@ $(document).ready(function () {
         for (const a of arr) {
             var formattedBillInvoice = "$" + number_format(a.billInvoice, 0, ',', ' .   '); // Định dạng số
             dataTable.row.add([
+                a.idorder,
                 a.name,
-                a.email,
-                a.address,
-                a.age,
+                a.nameproduct,
+                a.orderquantity,
                 a.orderDate,
                 formattedBillInvoice
             ]).draw();
