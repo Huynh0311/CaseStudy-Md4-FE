@@ -68,3 +68,7 @@ function search(){
 function showProduct(idP){
     window.location = "product_detail.html?id=" + idP;
 }
+
+function showUserProfile(idA){
+    window.location = "user_profile.html?id=" + idA;
+}
