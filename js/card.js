@@ -1,4 +1,4 @@
-let myCart = JSON.parse(localStorage.getItem("cart"));
+let myCart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function addToCart(id) {
     $.ajax({
@@ -22,7 +22,7 @@ function addToCart(id) {
             // lỗi
         }
     });
-    localStorage.setItem("cart", JSON.stringify(myCart))
+    localStorage.setItem("cart", JSON.stringify(myCart));
 }
 
 
