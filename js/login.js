@@ -1,3 +1,5 @@
+let id = localStorage.getItem('idAccount');
+let token = localStorage.getItem('token');
 function login() {
     let username = document.getElementById("userNameLogin").value;
     let password = document.getElementById("passwordLogin").value;
@@ -14,10 +16,11 @@ function login() {
                 if (r.name === "ROLE_ADMIN") {
                     console.log(data.token);
                     location.href = "index.html";
-                } else if (r.name === "ROLE_User") {
+                } else if (r.name === "ROLE_USER") {
                     location.href = "index.html";
                 }
                 localStorage.setItem("token", data.token);
+                    localStorage.setItem("idAccount", data.id);
             }
             },
             error: function (err) {
