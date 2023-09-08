@@ -15,13 +15,14 @@ function login() {
                     console.log(data.token);
                     location.href = "index.html";
                 } else if (r.name === "ROLE_USER") {
-                    location.href = "login.html";
+                    location.href = "index.html";
                 }
                 localStorage.setItem("token", data.token);
             }
             },
             error: function (err) {
                 console.log(err)
+                alert("Đăng nhập không thành công. Vui lòng kiểm tra lại.");
                 // lỗi
             }
         });
@@ -50,10 +51,11 @@ function register(){
         data: JSON.stringify(userData),
         success: function (data) {
             alert("Tài khoản được tạo thành công.");
+            window.location.href = "login.html";
         },
         error: function (error) {
             console.error(error);
-            alert("Đăng ký không thành công. Vui lòng thử lại sau.");
+            alert("Đăng ký không thành công. Vui lòng kiểm tra lại.");
         }
     });
 }
