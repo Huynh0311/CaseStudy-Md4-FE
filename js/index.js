@@ -45,7 +45,10 @@ function show(arr) {
 
 function search(){
     let search = document.getElementById("form1").value;
-    console.log(search);
+    if (search === "") {
+        getAll();
+        return;
+    }
     $.ajax({
         type: "GET",
         headers: {
@@ -62,6 +65,7 @@ function search(){
         }
     });
 }
+
 function showProduct(idP){
     window.location = "product_detail.html?id=" + idP;
 }
