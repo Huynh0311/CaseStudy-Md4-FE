@@ -1,4 +1,4 @@
-let token = localStorage.getItem('token');
+let token = localStorage.getItem('account');
 
 function getAll() {
     // Tạo ra 1 request.
@@ -9,7 +9,6 @@ function getAll() {
         },
         url: "http://localhost:8080/api/imgProduct",
         success: function (data) {
-            console.log(data)
             show(data);
         },
         error: function (err) {

@@ -10,3 +10,12 @@
 .fas {
     color: darkblue;
 }
+
+.card-text {
+    font-weight: 800;
+    color: red;
+}
+
+.btn-loginAccount{
+    border: none !important;
+}
