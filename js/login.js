@@ -12,6 +12,8 @@ function login() {
             url: "http://localhost:8080/login",
             data: JSON.stringify(accountlogin),
             success: function (data) {
+                localStorage.setItem("account", JSON.stringify(data));
+                console.log(localStorage.getItem("account"))
                 for (const r of data.roles) {
                 if (r.name === "ROLE_ADMIN") {
                     console.log(data.token);

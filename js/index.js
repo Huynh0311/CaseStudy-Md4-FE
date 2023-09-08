@@ -1,4 +1,4 @@
-let token = localStorage.getItem('token');
+let token = localStorage.getItem('account');
 
 function getAll() {
     // Tạo ra 1 request.

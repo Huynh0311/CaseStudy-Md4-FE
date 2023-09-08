@@ -31,7 +31,7 @@ $(document).ready(function () {
                 a.nameproduct,
                 a.orderquantity,
                 a.orderDate,
-                formattedBillInvoice
+                formattedBillInvoice,
             ]).draw();
         }
     }
