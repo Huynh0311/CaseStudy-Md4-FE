@@ -1,4 +1,3 @@
-
 var params = new window.URLSearchParams(window.location.search);
 var idP = params.get('id');
 
@@ -23,33 +22,36 @@ function getAll() {
 getAll();
 
 function show(p) {
-        str =`<div class="container">
+    str = `<div class="container">
                 <div class="row gx-5">
                     <aside class="col-lg-6">
                         <div class="border rounded-4 mb-3 d-flex justify-content-center">
                             <a data-fslightbox="mygalley" class="rounded-4" data-type="image">
-                                <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
+                                <img style="width: 624px; height: 453px; margin: auto;" class="rounded-4 fit" id="imgThumbnail"
                                      src="${p.imgProduct.thumbnail}"/>
                             </a>
                         </div>
                         <div class="d-flex justify-content-center mb-3">
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image" 
                                class="item-thumb">
-                                <img width="60" height="60" class="rounded-2"
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
+                                     src="${p.imgProduct.thumbnail}"/>
+                            </div>
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
+                               class="item-thumb">
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
                                      src="${p.imgProduct.img1}"/>
-                            </a>
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                               href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp"
+                            </div>
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
                                class="item-thumb">
-                                <img width="60" height="60" class="rounded-2"
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
                                      src="${p.imgProduct.img2}"/>
-                            </a>
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                               href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big3.webp"
+                            </div>
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
                                class="item-thumb">
-                                <img width="60" height="60" class="rounded-2"
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
                                      src="${p.imgProduct.img3}"/>
-                            </a>
+                            </div>
                         </div>
                         <!-- thumbs-wrap.// -->
                         <!-- gallery-wrap .end// -->
@@ -133,4 +135,8 @@ function show(p) {
                 </div>
             </div>`
     document.querySelector(".showProduct").innerHTML = str;
+}
+
+function showImg(src) {
+    document.getElementById("imgThumbnail").src = src;
 }
