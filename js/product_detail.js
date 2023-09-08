@@ -13,6 +13,7 @@ function getAll() {
         },
         url: "http://localhost:8080/api/product/" + idP,
         success: function (data) {
+            loadComments(idP);
             show(data);
         },
         error: function (err) {
@@ -143,8 +144,9 @@ function show(p) {
             <button class="btn btn-primary mt-2" onclick="postComment(this)">Đăng</button>
         </div>
     </div>`
-    loadComments(idP);
+
     document.querySelector(".showProduct").innerHTML = str;
+    loadComments(idP);
 }
 
 
@@ -184,9 +186,7 @@ function loadComments(productId) {
         }
     });
 }
-
     function postComment(button) {
-        const productId = idP;
         const commentText = button.parentElement.querySelector('textarea').value;
         const postData = {
             content: commentText,
@@ -199,8 +199,8 @@ function loadComments(productId) {
                 'Content-Type': 'application/json',
                 "Authorization": "Bearer " + token
             },
-            url: `http://localhost:8080/comments/add/${productId}/${id}`,
-            data: JSON.stringify(postData), // Gửi dữ liệu JSON
+            url: `http://localhost:8080/comments/add/${idP}/${id}`,
+            data: JSON.stringify(postData),
             contentType: "application/json",
             success: function (response) {
                 if (response === "Comment added successfully!") {
@@ -208,10 +208,11 @@ function loadComments(productId) {
                 } else {
                     console.log(response);
                 }
-                loadComments(productId);
+                loadComments(idP);
             },
             error: function (err) {
                 console.log(err);
+                alert("Bạn chưa đăng nhập , hãy đăng nhập để comment bài viết này !");
             }
         });
     }
@@ -219,8 +220,6 @@ function calculateTimePosted(createdAt) {
     const currentTime = new Date();
     const postedTime = new Date(createdAt);
     const timeDiff = currentTime - postedTime;
-
-    // Chuyển thời gian thành phút, giờ hoặc ngày tùy theo khoảng cách
     if (timeDiff < 60000) {
         return Math.floor(timeDiff / 1000) + " giây trước";
     } else if (timeDiff < 3600000) {
