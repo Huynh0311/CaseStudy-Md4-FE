@@ -1,4 +1,3 @@
-let token = localStorage.getItem('token');
 
 function getAll() {
     // Tạo ra 1 request.
@@ -42,7 +41,6 @@ function show(arr) {
     document.getElementById("body-content").innerHTML = str;
 }
 
-
 function search(){
     let search = document.getElementById("form1").value;
     if (search === "") {
@@ -68,4 +66,8 @@ function search(){
 
 function showProduct(idP){
     window.location = "product_detail.html?id=" + idP;
+}
+
+function showUserProfile(idA){
+    window.location = "user_profile.html?id=" + idA;
 }

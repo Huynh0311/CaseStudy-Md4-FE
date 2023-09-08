@@ -1,54 +1,53 @@
-let token = localStorage.getItem('token');
-let role = localStorage.getItem('role');
-let id = localStorage.getItem('idAccount');
-$(document).ready(function () {
-    const loginForm = $("#loginForm");
-
-    loginForm.submit(function (event) {
-        event.preventDefault();
-
-        const username = $("#username").val();
-        const password = $("#password").val();
-        const credentials = {
-            username: username,
-            password: password
-        };
-
-        $.ajax({
-            type: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "Bearer " + token
-            },
-            url: "http://localhost:8080/login",
-            contentType: "application/json",
-            data: JSON.stringify(credentials),
-            success: function (data) {
-                console.log(data.token);
-                const roles = data.role;
-
-                for (let i = 0; i < roles.length; i++) {
-                    role = roles[i].authority;
-                }
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("role", role);
-                localStorage.setItem("idAccount", data.id);
-                if (role == "ROLE_ADMIN") {
-                    console.log(roles)
-                window.location.href = "index.html";
-                } else if (role == "ROLE_USER") {
-                    window.location.href = "auser.html";
-                } else {
-                    window.location.href = "login.html";
-                }
-            },
-            error: function (error) {
-                console.log(error);
-                window.location.href = "login.html";
-            }
-        });
-    });
-});
+// let token = localStorage.getItem('token');
+// let role = localStorage.getItem('role');
+// let id = localStorage.getItem('idAccount');
+// $(document).ready(function () {
+//     const loginForm = $("#loginForm");
+//
+//     loginForm.submit(function (event) {
+//         event.preventDefault();
+//
+//         const username = $("#username").val();
+//         const password = $("#password").val();
+//         const credentials = {
+//             username: username,
+//             password: password
+//         };
+//
+//         $.ajax({
+//             type: "POST",
+//             headers: {
+//                 "Accept": "application/json",
+//                 "Authorization": "Bearer " + token
+//             },
+//             url: "http://localhost:8080/login",
+//             contentType: "application/json",
+//             data: JSON.stringify(credentials),
+//             success: function (data) {
+//                 console.log(data.token);
+//                 const roles = data.role;
+//
+//                 for (let i = 0; i < roles.length; i++) {
+//                     role = roles[i].authority;
+//                 }
+//                 localStorage.setItem("role", role);
+//                 localStorage.setItem("idAccount", data.id);
+//                 if (role == "ROLE_ADMIN") {
+//                     console.log(roles)
+//                 window.location.href = "index.html";
+//                 } else if (role == "ROLE_USER") {
+//                     window.location.href = "auser.html";
+//                 } else {
+//                     window.location.href = "login.html";
+//                 }
+//             },
+//             error: function (error) {
+//                 console.log(error);
+//                 window.location.href = "login.html";
+//             }
+//         });
+//     });
+// });
 
 // function getAll() {
 //     // Tạo ra 1 request.

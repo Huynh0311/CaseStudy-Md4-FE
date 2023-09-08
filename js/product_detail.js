@@ -1,6 +1,9 @@
+
 var params = new window.URLSearchParams(window.location.search);
 var idP = params.get('id');
-
+let token = localStorage.getItem('token');
+let id = localStorage.getItem('idAccount');
+var currentTime = new Date();
 function getAll() {
     // Tạo ra 1 request.
     $.ajax({
@@ -10,6 +13,7 @@ function getAll() {
         },
         url: "http://localhost:8080/api/product/" + idP,
         success: function (data) {
+            loadComments(idP);
             show(data);
         },
         error: function (err) {
@@ -133,10 +137,103 @@ function show(p) {
                         </div>
                     </main>
                 </div>
-            </div>`
+            </div>
+<div class="container">
+        <div class="comments-section" id="comments-section">
+        </div>
+        <div class="comment-form mt-3">
+            <h5>Đăng bình luận</h5>
+            <textarea class="form-control" rows="3" placeholder="Nhập bình luận của bạn"></textarea>
+            <button class="btn btn-primary mt-2" onclick="postComment(this)">Đăng</button>
+        </div>
+    </div>`
+
     document.querySelector(".showProduct").innerHTML = str;
+    loadComments(idP);
 }
 
 function showImg(src) {
     document.getElementById("imgThumbnail").src = src;
+}
+
+
+function loadComments(productId) {
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            "Authorization": "Bearer " + token
+        },
+        url: `http://localhost:8080/comments/product/${productId}`,
+        success: function (comments) {
+            console.log(comments)
+            const commentsSection = document.querySelector(".comments-section");
+            commentsSection.innerHTML = '';
+            if (comments.length > 0) {
+                comments.forEach(function (comment) {
+                    const timePosted = calculateTimePosted(comment.createdAt);
+                    const commentHtml = `
+                        <div class="comment" style="margin-bottom: 15px;border: 1px solid #ddd;padding: 10px;border-radius: 8px;">
+                            <div>
+                            <span style="display: flex"> <img src="${comment.account.image}" style="width: 35px ; height: 35px ; border-radius: 50% ; border: 3px solid grey"> <h5 style="margin-left: 10px ; margin-top: 7px">${comment.account.username} </h5> <h8 style="margin-left: 15px ; color: grey ; margin-top: 7px">${timePosted}</h8> </span>
+                             </div>
+                            <div class="comment-content" style="border-radius: 8px;padding: 10px;">
+                            <h6>${comment.content}</h6>
+                            </div>    
+                        </div>
+                    `;
+                    commentsSection.insertAdjacentHTML('beforeend', commentHtml);
+                });
+            } else {
+                commentsSection.innerHTML = '<p>Chưa có bình luận nào.</p>';
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+    function postComment(button) {
+        const commentText = button.parentElement.querySelector('textarea').value;
+        const postData = {
+            content: commentText,
+            createdBy: id
+        };
+        $.ajax({
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + token
+            },
+            url: `http://localhost:8080/comments/add/${idP}/${id}`,
+            data: JSON.stringify(postData),
+            contentType: "application/json",
+            success: function (response) {
+                if (response === "Comment added successfully!") {
+                    button.parentElement.querySelector('textarea').value = '';
+                } else {
+                    console.log(response);
+                }
+                loadComments(idP);
+            },
+            error: function (err) {
+                console.log(err);
+                alert("Bạn chưa đăng nhập , hãy đăng nhập để comment bài viết này !");
+            }
+        });
+    }
+function calculateTimePosted(createdAt) {
+    const currentTime = new Date();
+    const postedTime = new Date(createdAt);
+    const timeDiff = currentTime - postedTime;
+    if (timeDiff < 60000) {
+        return Math.floor(timeDiff / 1000) + " giây trước";
+    } else if (timeDiff < 3600000) {
+        return Math.floor(timeDiff / 60000) + " phút trước";
+    } else if (timeDiff < 86400000) {
+        return Math.floor(timeDiff / 3600000) + " giờ trước";
+    } else {
+        return Math.floor(timeDiff / 86400000) + " ngày trước";
+    }
 }
