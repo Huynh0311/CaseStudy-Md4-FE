@@ -58,6 +58,7 @@ function search(){
         },
         error: function (err) {
             console.log(err)
+            window.location = "index.htmlgit"
         }
     });
 }
