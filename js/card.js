@@ -16,13 +16,14 @@ function addToCart(id) {
             } else {
                 myCart.push({...data, cartQuantity: 1});
             }
+            localStorage.setItem("cart", JSON.stringify(myCart));
         },
         error: function (err) {
             console.log(err)
             // lỗi
         }
     });
-    localStorage.setItem("cart", JSON.stringify(myCart));
+
 }
 
 
@@ -38,9 +39,9 @@ function displayCart() {
         });
         cartHtml += "</ul>";
     }
-
+    document.getElementById("cartHtml").innerHTML = cartHtml;
     cartElement.innerHTML = cartHtml;
 }
-
+displayCart()
 
 
