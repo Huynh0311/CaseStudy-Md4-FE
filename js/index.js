@@ -1,4 +1,4 @@
-let token = localStorage.getItem('account');
+let token = localStorage.getItem('token');
 
 function getAll() {
     // Tạo ra 1 request.
@@ -40,6 +40,26 @@ function show(arr) {
         `
     }
     document.getElementById("body-content").innerHTML = str;
+}
+
+
+function search(){
+    let search = document.getElementById("form1").value;
+    console.log(search);
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            "Authorization": "Bearer " + token
+        },
+        url: "http://localhost:8080/api/products/search/"+ search,
+        success: function (data) {
+            show(data);
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    });
 }
 function showProduct(idP){
     window.location = "product_detail.html?id=" + idP;
