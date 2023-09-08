@@ -6,10 +6,10 @@ function getAll() {
         type: "GET",
         headers: {
             'Accept': 'application/json',
-            "Authorization": "Bearer " + token
         },
-        url: "http://localhost:8080/accounts",
+        url: "http://localhost:8080/api/imgProduct",
         success: function (data) {
+            console.log(data)
             show(data);
         },
         error: function (err) {
@@ -23,20 +23,22 @@ getAll();
 
 function show(arr) {
     let str = "";
-    for (const a of arr) {
-        str += ` <tr>
-                <td>${a.id}</td>
-                <td>${a.username}</td>
-                <td>${a.password}</td>
-                <td>`
-        for (const r of a.roles) {
-            if (a.roles.indexOf(r) ===( a.roles.length - 1)) str +=`${r.name}`;
-            else str +=`${r.name}, `;
-        }
-        str += `</td>
-                <td><button type="button" class="btn btn-warning" data-toggle="modal" onclick="showEdit(${a.id})" data-target="#ModalEdit">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-toggle="modal" onclick="getId(${a.id})" data-target="#ModalDelete">Delete</button></td>
-             </tr> `;
+    for (const p of arr) {
+        str += `
+                  <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                    <div class="card w-100 my-2 shadow-2-strong">
+                      <img src="${p.thumbnail}" class="card-img-top" style="aspect-ratio: 1 / 1" />
+                      <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">${p.product.name}</h5>
+                        <p class="card-text">$${p.product.price}</p>
+                        <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+                          <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
+                          <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        `
     }
-    document.getElementById("show").innerHTML = str;
+    document.getElementById("body-content").innerHTML = str;
 }
