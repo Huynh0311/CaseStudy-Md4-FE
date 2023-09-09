@@ -51,7 +51,6 @@ function search(){
         type: "GET",
         headers: {
             'Accept': 'application/json',
-            "Authorization": "Bearer " + token
         },
         url: "http://localhost:8080/api/products/search/"+ search,
         success: function (data) {

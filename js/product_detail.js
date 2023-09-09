@@ -1,9 +1,9 @@
-
 var params = new window.URLSearchParams(window.location.search);
 var idP = params.get('id');
 let token = localStorage.getItem('token');
 let id = localStorage.getItem('idAccount');
 var currentTime = new Date();
+
 function getAll() {
     // Tạo ra 1 request.
     $.ajax({
@@ -193,36 +193,38 @@ function loadComments(productId) {
         }
     });
 }
-    function postComment(button) {
-        const commentText = button.parentElement.querySelector('textarea').value;
-        const postData = {
-            content: commentText,
-            createdBy: id
-        };
-        $.ajax({
-            type: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                "Authorization": "Bearer " + token
-            },
-            url: `http://localhost:8080/comments/add/${idP}/${id}`,
-            data: JSON.stringify(postData),
-            contentType: "application/json",
-            success: function (response) {
-                if (response === "Comment added successfully!") {
-                    button.parentElement.querySelector('textarea').value = '';
-                } else {
-                    console.log(response);
-                }
-                loadComments(idP);
-            },
-            error: function (err) {
-                console.log(err);
-                alert("Bạn chưa đăng nhập , hãy đăng nhập để comment bài viết này !");
+
+function postComment(button) {
+    const commentText = button.parentElement.querySelector('textarea').value;
+    const postData = {
+        content: commentText,
+        createdBy: id
+    };
+    $.ajax({
+        type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + token
+        },
+        url: `http://localhost:8080/comments/add/${idP}/${id}`,
+        data: JSON.stringify(postData),
+        contentType: "application/json",
+        success: function (response) {
+            if (response === "Comment added successfully!") {
+                button.parentElement.querySelector('textarea').value = '';
+            } else {
+                console.log(response);
             }
-        });
-    }
+            loadComments(idP);
+        },
+        error: function (err) {
+            console.log(err);
+            alert("Bạn chưa đăng nhập , hãy đăng nhập để comment bài viết này !");
+        }
+    });
+}
+
 function calculateTimePosted(createdAt) {
     const currentTime = new Date();
     const postedTime = new Date(createdAt);
