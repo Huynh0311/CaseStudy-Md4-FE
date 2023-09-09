@@ -30,7 +30,7 @@ $(window).on('load', function () {
                     ${JSON.parse(localStorage.getItem('account')).username}
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Xem thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="profile.html">Xem thông tin cá nhân</a></li>
                     <li><a class="dropdown-item" id="shop${idAccount}" href=""></a></li>
                     <li><button class="dropdown-item" onclick="logout()">Đăng xuất</button></li>
                   </ul>
