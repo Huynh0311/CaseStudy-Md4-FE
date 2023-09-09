@@ -1,4 +1,5 @@
-
+let token = localStorage.getItem('token');
+let id = localStorage.getItem('idAccount');
 function getAll() {
     // Tạo ra 1 request.
     $.ajax({
@@ -56,6 +57,7 @@ function search(){
         },
         error: function (err) {
             console.log(err)
+            getAll();
         }
     });
 }

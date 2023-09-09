@@ -99,6 +99,7 @@ function getNameShop() {
       for (const a of response) {
         console.log(a.nameshop);
         document.getElementById("nameShop").innerHTML = a.nameshop;
+        document.getElementById("nameShop2").innerHTML = a.nameshop;
       }
     },
     error: function (err) {
