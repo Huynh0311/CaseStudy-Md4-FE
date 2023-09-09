@@ -1,5 +1,5 @@
-let token = localStorage.getItem('token');
-let id = localStorage.getItem('idAccount');
+// let token = localStorage.getItem('token');
+// let id = localStorage.getItem('idAccount');
 function getAll() {
     // Tạo ra 1 request.
     $.ajax({
@@ -44,23 +44,30 @@ function show(arr) {
 
 function search(){
     let search = document.getElementById("form1").value;
-    console.log(search);
+    if (search === "") {
+        getAll();
+        return;
+    }
     $.ajax({
         type: "GET",
         headers: {
             'Accept': 'application/json',
             "Authorization": "Bearer " + token
         },
-        url: "http://localhost:8080/api/products/search/"+ search,
+        url: "http://localhost:8080/api/products/search/"+search,
         success: function (data) {
             show(data);
         },
         error: function (err) {
             console.log(err)
-            getAll();
         }
     });
 }
+
 function showProduct(idP){
     window.location = "product_detail.html?id=" + idP;
+}
+
+function showUserProfile(idA){
+    window.location = "user_profile.html?id=" + idA;
 }

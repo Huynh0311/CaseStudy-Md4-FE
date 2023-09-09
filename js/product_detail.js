@@ -26,7 +26,7 @@ function getAll() {
 getAll();
 
 function show(p) {
-        str =`<div class="container">
+    str = `<div class="container">
                 <div class="row gx-5">
                     <aside class="col-lg-6">
                         <div class="border rounded-4 mb-3 d-flex justify-content-center">
@@ -36,23 +36,26 @@ function show(p) {
                             </a>
                         </div>
                         <div class="d-flex justify-content-center mb-3">
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image" 
                                class="item-thumb">
-                                <img width="60" height="60" class="rounded-2"
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
+                                     src="${p.imgProduct.thumbnail}"/>
+                            </div>
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
+                               class="item-thumb">
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
                                      src="${p.imgProduct.img1}"/>
-                            </a>
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                               href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big2.webp"
+                            </div>
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
                                class="item-thumb">
-                                <img width="60" height="60" class="rounded-2"
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
                                      src="${p.imgProduct.img2}"/>
-                            </a>
-                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                               href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big3.webp"
+                            </div>
+                            <div data-fslightbox="mygalley" class="border mx-1 rounded-2" data-type="image"
                                class="item-thumb">
-                                <img width="60" height="60" class="rounded-2"
+                                <img width="60" height="60" class="rounded-2" id="imgElement" onclick="showImg(this.src)"
                                      src="${p.imgProduct.img3}"/>
-                            </a>
+                            </div>
                         </div>
                         <!-- thumbs-wrap.// -->
                         <!-- gallery-wrap .end// -->
@@ -147,6 +150,10 @@ function show(p) {
 
     document.querySelector(".showProduct").innerHTML = str;
     loadComments(idP);
+}
+
+function showImg(src) {
+    document.getElementById("imgThumbnail").src = src;
 }
 
 

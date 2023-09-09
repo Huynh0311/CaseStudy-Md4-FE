@@ -30,7 +30,7 @@
           <div class="d-flex float-end">
             <a class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center login" id="login"></a>
             <a href="" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" > <i class="fas fa-heart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">Wishlist</p> </a>
-            <a href="" class="border rounded py-1 px-3 nav-link d-flex align-items-center" > <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
+            <a href="cart.html" class="border rounded py-1 px-3 nav-link d-flex align-items-center" > <i class="fas fa-shopping-cart m-1 me-md-2"></i><p class="d-none d-md-block mb-0">My cart</p> </a>
             <a href="shop/index.html" class="border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank"> <i class="fas fa-chart-line m-1 me-md-2"></i> <p class="d-none d-md-block mb-0">Revenue</p> </a>
           </div>
         </div>
@@ -77,9 +77,19 @@
           <li class="nav-item">
             <a class="nav-link text-dark" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-dark" href="#">Categories</a>
-          </li>
+          <div class="dropdown">
+            <button
+                    class="btn dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-mdb-toggle="dropdown"
+                    aria-expanded="false">
+              Categories
+            </button>
+            <ul class="dropdown-menu categoryList" aria-labelledby="dropdownMenuButton">
+
+            </ul>
+          </div>
           <li class="nav-item">
             <a class="nav-link text-dark" href="#">Hot offers</a>
           </li>
@@ -442,5 +452,6 @@
 <!-- Footer -->
 </body>
 </html>
-<script src="js/index.js"></script>
+<script src="js/Categories.js"></script>
 <script src="js/accountLogin.js"></script>
+<script src="js/index.js"></script>
