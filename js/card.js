@@ -65,16 +65,16 @@ function updateCartDisplay() {
                                 <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                                     <h6 class=""> Số Lượng: 
                                         <button class="btn btn-light border text-danger btn-sm" onclick="decreaseQuantity(${index})">-</button>
-                                        ${item.cartQuantity}
+                                        ${item.cartQuantity}  
                                         <button class="btn btn-light border text-success btn-sm" onclick="increaseQuantity(${index})">+</button>
                                     </h6>
-                                    <p> Thành tiền: ${item.cartQuantity * item.price}</p>
+                                    <p> Thành tiền: ${item.cartQuantity * item.price} $</p>
                                 </div>
                                 <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                                     <div class="float-md-end">
                                         <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i
                                                 class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                        <button class="btn btn-light border text-danger icon-hover-danger" onclick="deleteProductCard(${index})">Remove</button>
+                                        <button class="btn btn-light border text-danger icon-hover-danger" onclick="deleteProductCard(${index})">Xoá khỏi giỏ hàng</button>
                                     </div>
                                 </div>
                             </li>
@@ -121,10 +121,8 @@ function deleteProductCard(index) {
 function pay() {
     let total = 0;
 
-    // Tạo một mảng sản phẩm cho phần thanh toán
     const productsForPayment = [];
 
-    // Tính tổng tiền của tất cả sản phẩm trong giỏ hàng và thêm chúng vào mảng sản phẩm cho thanh toán
     myCart.forEach(item => {
         total += item.cartQuantity * item.price;
         productsForPayment.push({
