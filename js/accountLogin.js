@@ -23,5 +23,6 @@ $(window).on('load', function () {
 function logout(){
     localStorage.removeItem("account");
     localStorage.removeItem("token");
+    localStorage.removeItem("idAccount")
     window.location.href = "";
 }

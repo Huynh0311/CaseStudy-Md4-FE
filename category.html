@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/accountLogin.css">
     <link rel="stylesheet" href="css/categories.css">
+    <link rel="stylesheet" href="css/element.css">
 
 </head>
 <body>
@@ -203,7 +204,7 @@
                                                 Min
                                             </p>
                                             <div class="form-outline">
-                                                <input type="number" id="numberSearchMin" class="form-control" min="0" value="0"/>
+                                                <input type="number" id="numberSearchMin" class="form-control" min="0" value="0" placeholder="min"/>
                                                 <label class="form-label" for="numberSearchMin">$0</label>
                                             </div>
                                         </div>
@@ -212,12 +213,12 @@
                                                 Max
                                             </p>
                                             <div class="form-outline">
-                                                <input type="number" id="numberSearchMax" class="form-control" min="0" />
+                                                <input type="number" id="numberSearchMax" class="form-control" min="0" placeholder="max"/>
                                                 <label class="form-label" for="numberSearchMax">$1,0000</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-white w-100 border border-secondary">apply</button>
+                                    <button type="button" class="btn btn-white w-100 border border-secondary" onclick="searchByPrice()">apply</button>
                                 </div>
                             </div>
                         </div>
