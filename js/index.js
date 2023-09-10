@@ -32,16 +32,62 @@ function show(arr) {
                         <p class="card-text">$${p.price}</p>
                         <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
                           <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
-                          <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+                          <button class="btn btn-light border px-2 pt-2 icon-hover" style="background-color: " id="likeProduct${p.id}" onclick="LikeProduct(${p.id})">
+                          <i class="fas fa-heart fa-lg text-secondary px-1" style="color: blue"></i>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
         `
-    }
+        function likePost() {
+            const likeButton = document.getElementById(`likeProduct${p.id}`);
+            $.ajax({
+                type: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    "Authorization": "Bearer " + token
+                },
+                url: `http://localhost:8080/api/like/${p.id}/`+localStorage.getItem('idAccount'),
+                success: function (response) {
+                    console.log(response);
+                    if (response === true) {
+                        document.getElementById(`likeProduct${p.id}`).style.backgroundColor = "pink";
+                    } else {
+                        document.getElementById(`likeProduct${p.id}`).style.backgroundColor = "white";
+                    }
+                },
+                error: function (err) {
+                    console.error("Error liking the post:", err);
+                }
+            });
+        }
+        likePost();
     document.getElementById("body-content").innerHTML = str;
+    }
 }
-
+function LikeProduct(idProduct) {
+    let idAccount = localStorage.getItem('idAccount');
+    let addlike = {idProduct,idAccount };
+    $.ajax({
+        type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', // Set the content type
+            "Authorization": "Bearer " + token
+        },
+        url: `http://localhost:8080/api/addLike`,
+        data: JSON.stringify(addlike),
+        success: function (response) {
+            console.log(response);
+            alert(response);
+            getAll();
+        },
+        error: function (err) {
+            console.error("Error adding like:", err);
+        }
+    });
+}
 function search(){
     let search = document.getElementById("form1").value;
     if (search === "") {

@@ -107,7 +107,7 @@ function getNameShop() {
     }
   });
 };
-getNameShop()
+getNameShop();
 function number_format(number, decimals, dec_point, thousands_sep) {
   // Đây là một hàm JavaScript tùy chỉnh để định dạng số theo kiểu có dấu phân cách hàng nghìn và dấu thập phân, giống như hàm number_format trong PHP. Các tham số của hàm là:
   // *     example: number_format(1234.56, 2, ',', ' ');

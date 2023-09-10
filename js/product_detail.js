@@ -160,10 +160,10 @@ function showImg(src) {
 function loadComments(productId) {
     $.ajax({
         type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            "Authorization": "Bearer " + token
-        },
+            headers: {
+                'Accept': 'application/json',
+                "Authorization": "Bearer " + token
+            },
         url: `http://localhost:8080/comments/product/${productId}`,
         success: function (comments) {
             console.log(comments)

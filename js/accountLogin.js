@@ -13,6 +13,7 @@ $(window).on('load', function () {
                 document.getElementById(`shop${idAccount}`).innerHTML = "Vào cửa hàng";
             //     nếu có shop rồi sẽ chuyển đến trang
             //     bằng câu lệnh này document.getElementById(`shop${idAccount}`).href = "name shop page";
+                document.getElementById(`shop${idAccount}`).href = "shop/index.html";
             },
             error: function (err) {
                 document.getElementById(`shop${idAccount}`).innerHTML = "Đăng ký bán hàng";
