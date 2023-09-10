@@ -63,12 +63,11 @@ function show(arr) {
             });
         }
         likePost();
-    document.getElementById("body-content").innerHTML = str;
+        document.getElementById("body-content").innerHTML = str;
     }
 }
-function LikeProduct(idProduct) {
-    let idAccount = localStorage.getItem('idAccount');
-    let addlike = {idProduct,idAccount };
+function LikeProduct(productId) {
+    let idP = productId
     $.ajax({
         type: "POST",
         headers: {
@@ -76,8 +75,7 @@ function LikeProduct(idProduct) {
             'Content-Type': 'application/json', // Set the content type
             "Authorization": "Bearer " + token
         },
-        url: `http://localhost:8080/api/addLike`,
-        data: JSON.stringify(addlike),
+        url: `http://localhost:8080/api/like/${idP}/${localStorage.getItem('idAccount')}`,
         success: function (response) {
             console.log(response);
             alert(response);
