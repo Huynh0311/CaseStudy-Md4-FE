@@ -31,7 +31,7 @@ function show(p) {
                     <aside class="col-lg-6">
                         <div class="border rounded-4 mb-3 d-flex justify-content-center">
                             <a data-fslightbox="mygalley" class="rounded-4" data-type="image">
-                                <img style="width: 624px; height: 453px; margin: auto;" class="rounded-4 fit" id="imgThumbnail"
+                                <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
                                      src="${p.imgProduct.thumbnail}"/>
                             </a>
                         </div>
@@ -160,10 +160,10 @@ function showImg(src) {
 function loadComments(productId) {
     $.ajax({
         type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            "Authorization": "Bearer " + token
-        },
+            headers: {
+                'Accept': 'application/json',
+                "Authorization": "Bearer " + token
+            },
         url: `http://localhost:8080/comments/product/${productId}`,
         success: function (comments) {
             console.log(comments)

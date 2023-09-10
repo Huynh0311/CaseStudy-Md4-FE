@@ -16,7 +16,6 @@ function login() {
                 console.log(localStorage.getItem("account"))
                 for (const r of data.roles) {
                 if (r.name === "ROLE_ADMIN") {
-                    console.log(data.token);
                     location.href = "index.html";
                 } else if (r.name === "ROLE_USER") {
                     location.href = "index.html";
@@ -28,7 +27,6 @@ function login() {
             error: function (err) {
                 console.log(err)
                 alert("Đăng nhập không thành công. Vui lòng kiểm tra lại.");
-                // lỗi
             }
         });
 }

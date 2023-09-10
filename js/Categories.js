@@ -1,4 +1,5 @@
-
+let token = localStorage.getItem('token');
+let id = localStorage.getItem('idAccount');
 function categories() {
     // Tạo ra 1 request.
     $.ajax({

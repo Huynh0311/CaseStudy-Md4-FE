@@ -1,4 +1,5 @@
-
+// let token = localStorage.getItem('token');
+// let id = localStorage.getItem('idAccount');
 function getAll() {
     // Tạo ra 1 request.
     $.ajax({
@@ -25,22 +26,68 @@ function show(arr) {
         str += `
                   <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
                     <div class="card w-100 my-2 shadow-2-strong">
-                      <img src="${p.imgProduct.thumbnail}" class="card-img-top" onclick="showProduct(${p.id})" style="aspect-ratio: 1 / 1" />
+                      <img src="${p.imgProduct.thumbnail}" class="card-img-top cursor-pointer" onclick="showProduct(${p.id})" style="aspect-ratio: 1 / 1" />
                       <div class="card-body d-flex flex-column">
-                        <h5 class="card-title name-product" onclick="showProduct(${p.id})">${p.name}</h5>
+                        <h5 class="card-title name-product cursor-pointer" onclick="showProduct(${p.id})">${p.name}</h5>
                         <p class="card-text">$${p.price}</p>
                         <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                          <button type="button" class="btn btn-success" onclick="addToCart(${p.id})">Thêm vào Giỏ Hàng</button>
-                          <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+                          <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
+                          <button class="btn btn-light border px-2 pt-2 icon-hover" style="background-color: " id="likeProduct${p.id}" onclick="LikeProduct(${p.id})">
+                          <i class="fas fa-heart fa-lg text-secondary px-1" style="color: blue"></i>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
         `
-    }
+        function likePost() {
+            const likeButton = document.getElementById(`likeProduct${p.id}`);
+            $.ajax({
+                type: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    "Authorization": "Bearer " + token
+                },
+                url: `http://localhost:8080/api/like/${p.id}/`+localStorage.getItem('idAccount'),
+                success: function (response) {
+                    console.log(response);
+                    if (response === true) {
+                        document.getElementById(`likeProduct${p.id}`).style.backgroundColor = "pink";
+                    } else {
+                        document.getElementById(`likeProduct${p.id}`).style.backgroundColor = "white";
+                    }
+                },
+                error: function (err) {
+                    console.error("Error liking the post:", err);
+                }
+            });
+        }
+        likePost();
     document.getElementById("body-content").innerHTML = str;
+    }
 }
-
+function LikeProduct(idProduct) {
+    let idAccount = localStorage.getItem('idAccount');
+    let addlike = {idProduct,idAccount };
+    $.ajax({
+        type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', // Set the content type
+            "Authorization": "Bearer " + token
+        },
+        url: `http://localhost:8080/api/addLike`,
+        data: JSON.stringify(addlike),
+        success: function (response) {
+            console.log(response);
+            alert(response);
+            getAll();
+        },
+        error: function (err) {
+            console.error("Error adding like:", err);
+        }
+    });
+}
 function search(){
     let search = document.getElementById("form1").value;
     if (search === "") {
@@ -52,13 +99,12 @@ function search(){
         headers: {
             'Accept': 'application/json',
         },
-        url: "http://localhost:8080/api/products/search/"+ search,
+        url: "http://localhost:8080/api/products/search/"+search,
         success: function (data) {
             show(data);
         },
         error: function (err) {
             console.log(err)
-            window.location = "index.htmlgit"
         }
     });
 }
