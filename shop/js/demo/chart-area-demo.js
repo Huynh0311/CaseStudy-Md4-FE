@@ -4,9 +4,10 @@ let token = localStorage.getItem('token');
 let id = localStorage.getItem('idAccount');
 year = 2023
 function logout() {
+  localStorage.removeItem("account");
   localStorage.removeItem("token");
   localStorage.removeItem("idAccount")
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 function getAll() {
   $.ajax({
