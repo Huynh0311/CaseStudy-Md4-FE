@@ -207,20 +207,15 @@ function postComment(button) {
             'Content-Type': 'application/json',
             "Authorization": "Bearer " + token
         },
-        url: `http://localhost:8080/comments/add/${idP}/${id}`,
+        url: `http://localhost:8080/comments/add/${idP}/${localStorage.getItem('idAccount')}`,
         data: JSON.stringify(postData),
         contentType: "application/json",
         success: function (response) {
-            if (response === "Comment added successfully!") {
                 button.parentElement.querySelector('textarea').value = '';
-            } else {
-                console.log(response);
-            }
-            loadComments(idP);
+            alert("comment sucsecfly !");
         },
         error: function (err) {
             console.log(err);
-            alert("Bạn chưa đăng nhập , hãy đăng nhập để comment bài viết này !");
         }
     });
 }
