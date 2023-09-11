@@ -88,6 +88,25 @@ function getPending() {
   });
 };
 getPending();
+// function getBillShop() {
+//   $.ajax({
+//     type: "GET",
+//     headers: {
+//       'Accept': 'application/json',
+//       "Authorization": "Bearer " + token
+//     },
+//     url: "http://localhost:8080/commodity/getBill/" + id,
+//     success: function (response) {
+//       for (const a of response) {
+//         console.log(a.nameshop);
+//       }
+//     },
+//     error: function (err) {
+//       console.log(err)
+//     }
+//   });
+// };
+// getBillShop()
 function getNameShop() {
   $.ajax({
     type: "GET",
@@ -95,20 +114,19 @@ function getNameShop() {
       'Accept': 'application/json',
       "Authorization": "Bearer " + token
     },
-    url: "http://localhost:8080/commodity/getBill/" + id,
+    url: "http://localhost:8080/commodity/getShop/" + id,
     success: function (response) {
-      for (const a of response) {
-        console.log(a.nameshop);
-        document.getElementById("nameShop").innerHTML = a.nameshop;
-        document.getElementById("nameShop2").innerHTML = a.nameshop;
-      }
+        console.log(response.name);
+        document.getElementById("nameShop").innerHTML = response.name;
+        document.getElementById("nameShop2").innerHTML = response.name;
     },
     error: function (err) {
       console.log(err)
     }
   });
 };
-getNameShop();
+getNameShop()
+
 function number_format(number, decimals, dec_point, thousands_sep) {
   // Đây là một hàm JavaScript tùy chỉnh để định dạng số theo kiểu có dấu phân cách hàng nghìn và dấu thập phân, giống như hàm number_format trong PHP. Các tham số của hàm là:
   // *     example: number_format(1234.56, 2, ',', ' ');

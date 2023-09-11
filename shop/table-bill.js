@@ -20,7 +20,6 @@ $(document).ready(function () {
         });
     };
 
-    // Hàm hiển thị dữ liệu trên DataTables
     function show(arr) {
         dataTable.clear().draw(); // Xóa dữ liệu cũ
         for (const a of arr) {
