@@ -14,7 +14,7 @@ function login() {
             success: function (data) {
                 localStorage.setItem("account", JSON.stringify(data));
                 console.log(localStorage.getItem("account"))
-                for (const r of data.roles) {
+                for (const r of data.role) {
                 if (r.name === "ROLE_ADMIN") {
                     console.log(data.token);
                     location.href = "index.html";

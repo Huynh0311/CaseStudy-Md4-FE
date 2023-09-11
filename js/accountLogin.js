@@ -23,5 +23,8 @@ $(window).on('load', function () {
 function logout(){
     localStorage.removeItem("account");
     localStorage.removeItem("token");
+    localStorage.removeItem("cart");
     window.location.href = "";
+    updateCartDisplay();
+
 }
