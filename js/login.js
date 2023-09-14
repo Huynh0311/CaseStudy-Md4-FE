@@ -5,16 +5,16 @@ function login() {
     let password = document.getElementById("passwordLogin").value;
     let accountlogin = {username, password};
     $.ajax({
-            type: "Post",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            url: "http://localhost:8080/login",
-            data: JSON.stringify(accountlogin),
-            success: function (data) {
-                localStorage.setItem("account", JSON.stringify(data));
-                console.log(localStorage.getItem("account"))
-                for (const r of data.role) {
+        type: "Post",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        url: "http://localhost:8080/login",
+        data: JSON.stringify(accountlogin),
+        success: function (data) {
+            localStorage.setItem("account", JSON.stringify(data));
+            console.log(localStorage.getItem("account"))
+            for (const r of data.roles) {
                 if (r.name === "ROLE_ADMIN") {
                     console.log(data.token);
                     location.href = "index.html";
@@ -22,15 +22,15 @@ function login() {
                     location.href = "index.html";
                 }
                 localStorage.setItem("token", data.token);
-                    localStorage.setItem("idAccount", data.id);
+                localStorage.setItem("idAccount", data.id);
             }
-            },
-            error: function (err) {
-                console.log(err)
-                alert("Đăng nhập không thành công. Vui lòng kiểm tra lại.");
-                // lỗi
-            }
-        });
+        },
+        error: function (err) {
+            console.log(err)
+            alert("Đăng nhập không thành công. Vui lòng kiểm tra lại.");
+            // lỗi
+        }
+    });
 }
 function register(){
     const username = $("#username").val();

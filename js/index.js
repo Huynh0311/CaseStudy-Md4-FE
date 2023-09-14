@@ -31,16 +31,60 @@ function show(arr) {
                         <p class="card-text">$${p.price}</p>
                         <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
                           <button  class="btn btn-primary shadow-0 me-1" onclick="addToCart(${p.id})">Add to cart</button>
-                          <a href="#!" class="btn btn-light border px-2 pt-2 icon-hover"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+                          <button class="btn btn-light border px-2 pt-2 icon-hover" style="background-color: " id="likeProduct${p.id}" onclick="LikeProduct(${p.id})">
+                          <i class="fas fa-heart fa-lg text-secondary px-1" style="color: blue"></i>
+                          </button>
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
         `
+        function likePost() {
+            const likeButton = document.getElementById(`likeProduct${p.id}`);
+            $.ajax({
+                type: "GET",
+                headers: {
+                    'Accept': 'application/json',
+                    "Authorization": "Bearer " + localStorage.getItem('token'),
+                },
+                url: `http://localhost:8080/api/like/${p.id}/`+localStorage.getItem('idAccount'),
+                success: function (response) {
+                    if (response === true) {
+                        document.getElementById(`likeProduct${p.id}`).style.backgroundColor = "pink";
+                    } else {
+                        document.getElementById(`likeProduct${p.id}`).style.backgroundColor = "white";
+                    }
+                },
+                error: function (err) {
+                    console.error("Error liking the post:", err);
+                }
+            });
+        }
+        likePost();
+        document.getElementById("body-content").innerHTML = str;
     }
-    document.getElementById("body-content").innerHTML = str;
 }
-
+function LikeProduct(productId) {
+    let idP = productId
+    $.ajax({
+        type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json', // Set the content type
+            "Authorization": "Bearer " + token
+        },
+        url: `http://localhost:8080/api/like/${idP}/${localStorage.getItem('idAccount')}`,
+        success: function (response) {
+            console.log(response);
+            alert(response);
+            getAll();
+        },
+        error: function (err) {
+            console.error("Error adding like:", err);
+        }
+    });
+}
 function search(){
     let search = document.getElementById("form1").value;
     if (search === "") {
@@ -52,13 +96,12 @@ function search(){
         headers: {
             'Accept': 'application/json',
         },
-        url: "http://localhost:8080/api/products/search/"+ search,
+        url: "http://localhost:8080/api/products/search/"+search,
         success: function (data) {
             show(data);
         },
         error: function (err) {
             console.log(err)
-            window.location = "index.htmlgit"
         }
     });
 }

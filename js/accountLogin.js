@@ -7,8 +7,8 @@ $(window).on('load', function () {
                     ${JSON.parse(localStorage.getItem('account')).username}
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Xem thông tin cá nhân</a></li>
-                    <li><a class="dropdown-item" href="#">Vào cửa hàng</a></li>
+                    <li><a class="dropdown-item" href="profile.html">Xem thông tin cá nhân</a></li>
+                    <li><a class="dropdown-item" href="shop/index.html">Vào cửa hàng</a></li>
                     <li><button class="dropdown-item" onclick="logout()">Đăng xuất</button></li>
                   </ul>
                 </div>`
@@ -23,8 +23,6 @@ $(window).on('load', function () {
 function logout(){
     localStorage.removeItem("account");
     localStorage.removeItem("token");
-    localStorage.removeItem("cart");
+    localStorage.removeItem("idAccount")
     window.location.href = "";
-    updateCartDisplay();
-
 }
